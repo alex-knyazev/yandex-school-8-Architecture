@@ -26,8 +26,12 @@ class FormModel {
     let event = new CustomEvent('dataReceived', { 'detail': 'Долго ждем ответа' });
       document.dispatchEvent(event);
     }, 2000 );
+    let dataByServer = 'Сервер хотел получить сообщение, но до него дошла лишь пустота.'
+    if(value.length) {
+      dataByServer = 'Сервер получил ваше сообщение.'
+    }
     setTimeout(() => {
-      let event = new CustomEvent('dataReceived', { 'detail': 'Сервер вам ответил, ура!' });
+      let event = new CustomEvent('dataReceived', { 'detail': dataByServer });
         document.dispatchEvent(event);
     }, 4000 );
   }
