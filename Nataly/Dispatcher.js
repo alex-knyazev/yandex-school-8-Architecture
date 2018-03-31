@@ -1,6 +1,5 @@
 class Dispatcher {
   constructor(name) {
-    this.name = name || 'Диспетчер приложения';
     this.stores = [];
     this.registerStore = this.registerStore.bind(this);
     this.dispatch = this.dispatch.bind(this);

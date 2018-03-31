@@ -19,13 +19,12 @@ class FormView extends View {
   constructor() {
     super(formElement);
     super.runListeners(listeners);
-    this.fieldsFromStore = [];
     this.dataFromStore = {};
     this.connectToStore = this.connectToStore.bind(this);
     this.updateByStore = this.updateByStore.bind(this);
   }
 
-  connectToStore(store, fieldsFromStore) {
+  connectToStore(store) {
     this.dataFromStore = store.data;
     store.addSubscriber(this.updateByStore);
   }
