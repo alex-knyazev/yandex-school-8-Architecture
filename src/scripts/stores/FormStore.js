@@ -1,4 +1,4 @@
-import { Store } from '../../Nataly';
+import { Store } from '../../../Nataly';
 
 import { logger } from '../basicLogger';
 import { SEND_VALUE_TO_SERVER } from '../actionsCreator/sendValueToServer';

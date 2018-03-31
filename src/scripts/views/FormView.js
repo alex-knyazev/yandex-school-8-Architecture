@@ -1,4 +1,4 @@
-import { View } from '../../Nataly';
+import { View } from '../../../Nataly';
 
 import { sendValueToServer } from '../actionsCreator/sendValueToServer';
 

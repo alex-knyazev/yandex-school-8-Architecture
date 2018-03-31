@@ -1,4 +1,4 @@
-import { View } from '../../Nataly';
+import { View } from '../../../Nataly';
 
 //находим элементы на сранице
 const logElement = document.getElementsByClassName('log')[0];

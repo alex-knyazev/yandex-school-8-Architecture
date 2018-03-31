@@ -1,4 +1,4 @@
-import { Dispatcher } from '../Nataly';
+import { Dispatcher } from '../../Nataly';
 
 import { logger } from './basicLogger';
 
