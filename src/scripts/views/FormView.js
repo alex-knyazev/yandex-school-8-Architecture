@@ -15,7 +15,6 @@ const listeners = [
   }
 ]
 
-
 class FormView extends View {
   constructor() {
     super(formElement);
