@@ -1,5 +1,3 @@
-import { Model } from '../../../Nataly'
-
 const events = {
   handleDataIsSent: (handler) => {
     document.addEventListener('dataIsSent', (e) => {
@@ -8,7 +6,6 @@ const events = {
   },
   handleDataReceived: (handler) => {
     document.addEventListener('dataReceived', (e) => {
-      debugger
       handler(e.detail);
     })
   }
@@ -17,6 +14,7 @@ const events = {
 class FormModel {
   constructor() {
     this.events = events;
+    this.sendDataToServer = this.sendDataToServer.bind(this);
   }
 
   sendDataToServer(value) {

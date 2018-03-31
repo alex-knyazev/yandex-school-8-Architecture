@@ -1,22 +1,27 @@
-class FormPresenter {
-  constructor(view, model) {
-    this.view = view;
-    this.model = model;
-    this.initEvents();
-  }
+import { Presenter } from "../../../Lorelei";
 
-  initEvents() {
-    this.view.events.handleSendToServer( (inputValue) => {
-      this.model.sendDataToServer(inputValue);
-    });
+const eventsConnector = {
+  viewToModel: [
+    {
+      in: 'handleSendToServer',
+      out: 'sendDataToServer'
+    },
+  ],
+  modelToView: [
+    {
+      in: 'handleDataIsSent',
+      out: 'updateView'
+    },
+    {
+      in: 'handleDataReceived',
+      out: 'updateView'
+    }
+  ]
+}
 
-    this.model.events.handleDataIsSent((status) => {
-      this.view.updateView(status);
-    });
-    this.model.events.handleDataReceived((data) => {
-      this.view.updateView(data);
-    })
-    
+class FormPresenter extends Presenter {
+  constructor(view, model, options) {
+    super(view, model, eventsConnector, options);
   }
 }
 

@@ -1,11 +1,9 @@
-import { View } from '../../../Nataly';
-
 //находим элементы на сранице
 const logElement = document.getElementsByClassName('log')[0];
 
-class LogView extends View {
+class LogView {
   constructor() {
-    super(logElement);
+    this.element = logElement;
     this.dataFromLogs = {};
     this.updateByLogger = this.updateByLogger.bind(this);
     this.updateView = this.updateView.bind(this);
@@ -24,6 +22,7 @@ class LogView extends View {
 
   updateView(newLogs) {
     const logs = newLogs;
+    debugger
     this.element.innerText = logs.join('\n');
   }
 }
