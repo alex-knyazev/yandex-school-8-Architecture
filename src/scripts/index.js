@@ -1,20 +1,7 @@
-import { dispatcher } from './basicDispatcher';
-import { logger } from './basicLogger';
-import { formStore } from './stores';
-
+import { FormPresenter } from './presenters/FormPresenter';
 import { FormView } from './views/FormView';
-import { LogView } from './views/LogView';
+import { FormModel } from './models/FormModel';
 
-// регистрируем store у диспетчера
-dispatcher.registerStore(formStore);
-
-// создаем view для формы
 const formView = new FormView();
-// подписываемся на логирование
-logger.lookFor(formView);
-//подписываемся во view на поля из formStore
-formView.connectToStore(formStore);
-
-// создаем view для формы
-const logView = new LogView();
-logView.connectToLogger(logger);
+const formModel = new FormModel();
+const formPresenter = new FormPresenter(formView, formModel);

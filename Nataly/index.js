@@ -1,11 +1,5 @@
-import { Dispatcher } from './Dispatcher';
-import { Store } from './Store';
-import { View } from './View';
-import { Logger } from './Logger'
+import { Model } from './Model';
 
 export {
-  Dispatcher,
-  Store,
-  View, 
-  Logger
+  Model,
 };
