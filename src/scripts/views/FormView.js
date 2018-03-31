@@ -1,6 +1,6 @@
 import { View } from '../../Nataly';
 
-import { sendValueToServer } from '../actions';
+import { sendValueToServer } from '../actionsCreator/sendValueToServer';
 
 const formElement = document.getElementsByClassName('view-stub')[0];
 const formButtonElement = document.getElementsByClassName('view-stub__apply')[0];
@@ -28,7 +28,6 @@ class FormView extends View {
 
   connectToStore(store, fieldsFromStore) {
     this.dataFromStore = store.data;
-    this.fieldsFromStore  = fieldsFromStore;
     store.addSubscriber(this.updateByStore);
   }
 

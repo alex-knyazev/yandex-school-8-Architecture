@@ -1,7 +1,7 @@
 import { Store } from '../../Nataly';
 
 import { logger } from '../basicLogger';
-import { SEND_VALUE_TO_SERVER } from '../actions';
+import { SEND_VALUE_TO_SERVER } from '../actionsCreator/sendValueToServer';
 
 const formStoreData = {
   answerByServer: 'Ответа от сервера еще не было',

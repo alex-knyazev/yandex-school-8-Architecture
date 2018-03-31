@@ -3,9 +3,13 @@ class Dispatcher {
     this.name = name || 'Диспетчер приложения';
     this.stores = [];
     this.registerStore = this.registerStore.bind(this);
-    this.makeAction = this.makeAction.bind(this);
+    this.dispatch = this.dispatch.bind(this);
   }
 
+  /**
+   * Регистрация хранилища
+   * @param {Store} store 
+   */
   registerStore(store) {
     if (!store ) {
       console.error('Вы должны передать store для регистрации!');
@@ -13,7 +17,11 @@ class Dispatcher {
     this.stores.push(store);
   }
 
-  makeAction(action) {
+  /**
+   * Оповещение зарегестрированных хранилищ об Action
+   * @param {object} action 
+   */
+  dispatch(action) {
     for (let i = 0; i < this.stores.length; i++) {
       const store = this.stores[i];
       store.update(action);

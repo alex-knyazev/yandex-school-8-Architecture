@@ -1,15 +1,9 @@
-const humanizeMethodName = (methodName) => {
-  methodName = methodName.split(' ');
-  methodName = methodName[methodName.length - 1];
-  return methodName;
-}
-
 class Logger {
   constructor() {
     this.logs = [];
     this.subscribers = [];
-    this.makeLog = this.makeLog.bind(this);
-    this.logToView = this.logToView.bind(this);
+    this.saveLog = this.saveLog.bind(this);
+    this.addSubscriber = this.addSubscriber.bind(this);
   }
 
   /**
@@ -18,22 +12,29 @@ class Logger {
    * todo - добавить поддержку аргументов разного типа 
    */
   lookFor(object) {
-    const makeLog  = this.makeLog;
+    const saveLog  = this.saveLog;
     const keys = Object.keys(object);
     for(let i = 0; i < keys.length; i++ ) {
       let value = object[keys[i]] 
       if(typeof value === 'function') {
         object[keys[i]]  = function() {
-          makeLog(object.constructor.name, value.name);
+          saveLog(object.constructor.name, value.name);
           return value(...arguments)
         } 
       }
     }
   }
 
-  makeLog(className, methodName) {
-    methodName = humanizeMethodName(methodName);
-    this.logs.push(`в экземпляре класса ${className} вызван метод ${methodName}`);
+  /**
+   * Обработка и сохранение лога
+   * @param {string} className 
+   * @param {string} methodName 
+   */
+  saveLog(className, methodName) {
+    methodName = methodName.split(' ');
+    methodName = methodName[methodName.length - 1];
+    const logNumber = this.logs.length + 1;
+    this.logs.push(`${logNumber}. в экземпляре класса ${className} вызван метод ${methodName}`);
     for (let i = 0; i < this.subscribers.length; i++) {
       const subscriber = this.subscribers[i];
       subscriber(this.logs);
@@ -47,10 +48,6 @@ class Logger {
   addSubscriber(subscriber) {
     this.subscribers.push(subscriber);
     subscriber(this.logs);
-  }
-
-  logToView() {
-    this.connectedView.logs = this.logs;
   }
 }
 

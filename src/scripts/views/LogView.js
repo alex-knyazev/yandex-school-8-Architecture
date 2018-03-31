@@ -16,7 +16,6 @@ class LogView extends View {
   }
 
   updateByLogger(newLogs) {
-    debugger
     this.dataFromLogs =  { ...this.dataFromLogs, newLogs };
     if (newLogs) {
       this.updateView(newLogs);

@@ -13,7 +13,7 @@ const formView = new FormView();
 // подписываемся на логирование
 logger.lookFor(formView);
 //подписываемся во view на поля из formStore
-formView.connectToStore(formStore, ['answerByServer']);
+formView.connectToStore(formStore);
 
 // создаем view для формы
 const logView = new LogView();
