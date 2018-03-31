@@ -3,7 +3,7 @@ import { Dispatcher } from '../Nataly';
 import { logger } from './basicLogger';
 
 const dispatcher = new Dispatcher();
-logger.lookForFunctions(dispatcher);
+logger.lookFor(dispatcher);
 
 export {
   dispatcher

@@ -1,27 +1,56 @@
+const humanizeMethodName = (methodName) => {
+  methodName = methodName.split(' ');
+  methodName = methodName[methodName.length - 1];
+  return methodName;
+}
+
 class Logger {
   constructor() {
     this.logs = [];
-    this.log = this.log.bind(this)
+    this.subscribers = [];
+    this.makeLog = this.makeLog.bind(this);
+    this.logToView = this.logToView.bind(this);
   }
 
-  //декорирование функций объекта класса
-  lookForFunctions(object) {
-    const log  = this.log;
+  /**
+   * Декорирование функций объекта для слежения за их вызовом
+   * @param {object} object
+   * todo - добавить поддержку аргументов разного типа 
+   */
+  lookFor(object) {
+    const makeLog  = this.makeLog;
     const keys = Object.keys(object);
     for(let i = 0; i < keys.length; i++ ) {
       let value = object[keys[i]] 
       if(typeof value === 'function') {
         object[keys[i]]  = function() {
-          log(object.constructor.name, value.name);
+          makeLog(object.constructor.name, value.name);
           return value(...arguments)
         } 
       }
     }
   }
 
-  log(className, methodName) {
-    console.log(`в экземпляре класса ${className} вызван метод ${methodName}`)
-    this.logs.push(`в экземпляре класса ${className} вызван метод ${methodName}`)
+  makeLog(className, methodName) {
+    methodName = humanizeMethodName(methodName);
+    this.logs.push(`в экземпляре класса ${className} вызван метод ${methodName}`);
+    for (let i = 0; i < this.subscribers.length; i++) {
+      const subscriber = this.subscribers[i];
+      subscriber(this.logs);
+    }
+  }
+
+  /**
+   * Добавление подписчика на изменения в Store
+   * @param {function} subscriber 
+   */
+  addSubscriber(subscriber) {
+    this.subscribers.push(subscriber);
+    subscriber(this.logs);
+  }
+
+  logToView() {
+    this.connectedView.logs = this.logs;
   }
 }
 

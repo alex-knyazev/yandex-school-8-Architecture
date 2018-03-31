@@ -1,8 +1,31 @@
 import { View } from '../../Nataly';
 
+//находим элементы на сранице
+const logElement = document.getElementsByClassName('log')[0];
+
 class LogView extends View {
-  constructor(DOMElement) {
-    super(DOMElement);
+  constructor() {
+    super(logElement);
+    this.dataFromLogs = {};
+    this.updateByLogger = this.updateByLogger.bind(this);
+    this.updateView = this.updateView.bind(this);
+  }
+
+  connectToLogger(logger) {
+    logger.addSubscriber(this.updateByLogger);
+  }
+
+  updateByLogger(newLogs) {
+    debugger
+    this.dataFromLogs =  { ...this.dataFromLogs, newLogs };
+    if (newLogs) {
+      this.updateView(newLogs);
+    }
+  }
+
+  updateView(newLogs) {
+    const logs = newLogs;
+    this.element.innerText = logs.join('\n');
   }
 }
 
