@@ -1,58 +1,80 @@
 import Logger from './Logger';
 
 class Presenter extends Logger {
-  constructor(view, model, eventsConnector, options) {
+  constructor(view, model, eventsConnectors, options) {
     super();
     this.view = view;
     this.model = model;
-    this.eventsConnector = eventsConnector;
-    this.initEvents = this.initEvents.bind(this);
+    this.eventsConnectors = eventsConnectors;
+    this.initConnectors = this.initConnectors.bind(this);
     this.options = options;
-    this.initEvents();
+    this.initConnectors();
   }
 
-  initEvents() {
+  /**
+   * инициализация коннекторов
+   */
+  initConnectors() {
+    this.initConnector('viewToModel');
+    this.initConnector('modelToView');
+    this.initConnector('modelToModel');
+  }
+
+  /**
+   * Связывание событий из источника с методом из цели
+   * @param {string} connectorType 
+   */
+  initConnector(connectorType) {
     const {
       view,
       model,
-      eventsConnector,
+      eventsConnectors,
       options,
     } = this;
-    const { viewToModel, modelToView, modelToModel } = eventsConnector;
     const { isLogging } = options;
-
-    if (viewToModel && viewToModel.length) {
-      viewToModel.forEach((connector) => {
-        view.events[connector.in]((value) => {
-          if (isLogging) {
-            this.saveLog('Presenter: viewToModel', connector);
-          }
-          this.model[connector.out](value);
-        });
-      });
+    const connectors = eventsConnectors[connectorType];
+    if (!connectors.length) {
+      return;
     }
 
-    if (modelToView && modelToView.length) {
-      modelToView.forEach((connector) => {
-        model.events[connector.in]((value) => {
-          if (isLogging) {
-            this.saveLog('Presenter: modelToView', connector);
-          }
-          this.view[connector.out](value);
-        });
-      });
+    let source;
+    let target;
+    switch (connectorType) {
+      case 'viewToModel':
+        source = view;
+        target = model;        
+        break;
+      case 'modelToView':
+        source = model;
+        target = view;
+        break;
+      case 'modelToModel':
+        source = model;
+        target = model;
+        break;
+      default:
+        throw new Error('фреймворк не знает о предоставленном типе коннектора');
     }
 
-    if (modelToModel && modelToModel.length) {
-      modelToModel.forEach((connector) => {
-        model.events[connector.in]((value) => {
-          if (isLogging) {
-            this.saveLog('Presenter: modelToModel', connector);
-          }
-          this.model[connector.out](value);
-        });
+    connectors.forEach((connector) => {
+      source.events[connector.in]((value) => {
+        if (isLogging) {
+          this.saveLog(Presenter.makeLog(connectorType, connector));
+        }
+        target[connector.out](value);
       });
-    }
+    });
+  }
+
+  /**
+   * создание лога
+   * @param {string} connectorType 
+   * @param {object} connector 
+   */
+  static makeLog(connectorType, connector) {
+    const communicators = connectorType.split('To').map(c => c.toLowerCase());
+    return `Presenter: -> на событие ${connector.in} из ${communicators[0]} \
+      срабатывает метод ${connector.out} из ${communicators[1]}`;
   }
 }
 

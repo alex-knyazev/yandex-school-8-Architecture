@@ -1,6 +1,6 @@
 import { Presenter } from '../../../Lorelei';
 
-const eventsConnector = {
+const eventsConnectors = {
   viewToModel: [
     {
       in: 'handleSendToServer',
@@ -27,7 +27,7 @@ const eventsConnector = {
 
 class FormPresenter extends Presenter {
   constructor(view, model, options) {
-    super(view, model, eventsConnector, options);
+    super(view, model, eventsConnectors, options);
   }
 }
 

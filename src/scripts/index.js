@@ -13,5 +13,5 @@ const formPresenter = new FormPresenter(formView, formModel, { isLogging });
 
 // создаем view для логирования
 const logView = new LogView();
-logView.connectToLogger(formPresenter.getLogger());
+logView.connectToLogger(formPresenter.getLoggerPublisher());
 

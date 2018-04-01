@@ -8,10 +8,18 @@ class LogView {
     this.updateView = this.updateView.bind(this);
   }
 
+  /**
+   * Соединение с логгером
+   * @param {function} addSubscriber
+   */
   connectToLogger(addSubscriber) {
     addSubscriber(this.updateByLogger);
   }
 
+  /**
+   * Функция, вызывающаяся при обновлении логгера
+   * @param {array} newLogs 
+   */
   updateByLogger(newLogs) {
     this.dataFromLogs = { ...this.dataFromLogs, newLogs };
     if (newLogs) {
@@ -19,6 +27,9 @@ class LogView {
     }
   }
 
+  /**
+   * Изменение DOM
+   */
   updateView(newLogs) {
     const logs = newLogs;
     this.element.innerText = logs.join('\n');

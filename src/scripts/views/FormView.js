@@ -22,6 +22,10 @@ class FormView {
     this.events = events;
   }
 
+  /**
+   * Изменение DOM
+   * @param {string} data 
+   */
   updateView(data) {
     this.elements.formAnswerElement.innerText = data;
   }
