@@ -1,5 +1,5 @@
 class Dispatcher {
-  constructor(name) {
+  constructor() {
     this.stores = [];
     this.registerStore = this.registerStore.bind(this);
     this.dispatch = this.dispatch.bind(this);
@@ -10,8 +10,8 @@ class Dispatcher {
    * @param {Store} store 
    */
   registerStore(store) {
-    if (!store ) {
-      console.error('Вы должны передать store для регистрации!');
+    if (!store) {
+      throw new Error('вы должны передать store для регистрации в dispatcher');
     }
     this.stores.push(store);
   }
@@ -26,9 +26,6 @@ class Dispatcher {
       store.update(action);
     }
   }
-
 }
 
-export {
-  Dispatcher
-};
+export default Dispatcher;

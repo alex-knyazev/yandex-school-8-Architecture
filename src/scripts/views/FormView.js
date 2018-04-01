@@ -12,13 +12,13 @@ const listeners = [
     formButtonElement.addEventListener('click', () => {
       sendValueToServer(formInputElement.value);
     });
-  }
-]
+  },
+];
 
 class FormView extends View {
   constructor() {
     super(formElement);
-    super.runListeners(listeners);
+    View.runListeners(listeners);
     this.dataFromStore = {};
     this.connectToStore = this.connectToStore.bind(this);
     this.updateByStore = this.updateByStore.bind(this);
@@ -30,21 +30,19 @@ class FormView extends View {
   }
 
   updateByStore(newData) {
-    this.dataFromStore =  { ...this.dataFromStore, newData };
-    this.updateView(newData);
+    this.dataFromStore = { ...this.dataFromStore, newData };
+    FormView.updateView(newData);
   }
 
-  updateView(newData) {
+  static updateView(newData) {
     const { answerByServer } = newData;
     formAnswerElement.innerText = '...';
-    setTimeout(()=> {
+    setTimeout(() => {
       formAnswerElement.innerText = answerByServer;
-    }, 200);
+    }, 100);
   }
 }
 
 
-export {
-  FormView
-}
+export default FormView;
 

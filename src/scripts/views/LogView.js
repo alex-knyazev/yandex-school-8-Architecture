@@ -1,6 +1,5 @@
 import { View } from '../../../Nataly';
 
-//находим элементы на сранице
 const logElement = document.getElementsByClassName('log')[0];
 
 class LogView extends View {
@@ -16,7 +15,7 @@ class LogView extends View {
   }
 
   updateByLogger(newLogs) {
-    this.dataFromLogs =  { ...this.dataFromLogs, newLogs };
+    this.dataFromLogs = { ...this.dataFromLogs, newLogs };
     if (newLogs) {
       this.updateView(newLogs);
     }
@@ -28,7 +27,5 @@ class LogView extends View {
   }
 }
 
-export {
-  LogView
-}
+export default LogView;
 

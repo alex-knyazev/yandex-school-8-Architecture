@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: [
     './src/scripts/index.js', 
-    './src/styles/index.scss'
+    './src/styles/index.scss',
   ],
   output: {
     filename: './js/bundle.js',
@@ -18,14 +18,14 @@ module.exports = {
         test: /\.js$/,
         include: path.resolve(__dirname, 'src/*'),
         use: {
-          loader: "babel-loader"
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.(sass|scss)$/,
         include: path.resolve(__dirname, 'src/styles'),
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
+          fallback: 'style-loader',
           use: [
             {
               loader: 'css-loader',

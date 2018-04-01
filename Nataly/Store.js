@@ -17,7 +17,7 @@ class Store {
    * @param {object} action 
    */
   update(action) {
-    const subscribers = this.subscribers;
+    const { subscribers } = this;
     const updatingResult = this.updateStoreByActions(action);
     if (updatingResult) {
       for (let i = 0; i < subscribers.length; i++) {
@@ -35,9 +35,7 @@ class Store {
     this.subscribers.push(subscriber);
     subscriber(this.data);
   }
-
 }
 
-export {
-  Store
-}
+export default Store;
+

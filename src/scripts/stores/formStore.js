@@ -1,6 +1,6 @@
 import { Store } from '../../../Nataly';
 
-import { logger } from '../basicLogger';
+import logger from '../basicLogger';
 import { SEND_VALUE_TO_SERVER } from '../actionsCreator/sendValueToServer';
 
 const formStoreData = {
@@ -14,14 +14,11 @@ function updateStoreByActions(action) {
     default:
       return null;
   }
-};
+}
 
-
+// создаем singleton
 const formStore = new Store(formStoreData, updateStoreByActions);
-
-//подписываемся на логгинг события в formStore 
+// подписываемся на логгинг событий в formStore 
 logger.lookFor(formStore);
 
-export {
-  formStore
-}
+export default formStore;
