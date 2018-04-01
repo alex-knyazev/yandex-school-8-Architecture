@@ -6,7 +6,7 @@ At master branch you can find framework "Nataly" wich helps to realize "Flux" ar
 
 At mvp-architecture branch you can find framework "Lorelei" wich helps to realize "MVP" architecture in your application.
 
-Documentation.
+[Documentation](./DOCS.md);
 
 
  

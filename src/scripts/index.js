@@ -1,5 +1,6 @@
 import dispatcher from './basicDispatcher';
 import logger from './basicLogger';
+
 import formStore from './stores/formStore';
 
 import FormView from './views/FormView';

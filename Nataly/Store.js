@@ -32,6 +32,9 @@ class Store {
    * @param {function} subscriber 
    */
   addSubscriber(subscriber) {
+    if (typeof subscriber !== 'function') {
+      throw new Error('подписчик, регистрируемыей в хранилище, должен быть функцией');
+    }
     this.subscribers.push(subscriber);
     subscriber(this.data);
   }
