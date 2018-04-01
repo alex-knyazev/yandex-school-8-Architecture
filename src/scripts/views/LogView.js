@@ -1,4 +1,3 @@
-//находим элементы на сранице
 const logElement = document.getElementsByClassName('log')[0];
 
 class LogView {
@@ -9,12 +8,12 @@ class LogView {
     this.updateView = this.updateView.bind(this);
   }
 
-  connectToLogger(logger) {
-    logger.addSubscriber(this.updateByLogger);
+  connectToLogger(addSubscriber) {
+    addSubscriber(this.updateByLogger);
   }
 
   updateByLogger(newLogs) {
-    this.dataFromLogs =  { ...this.dataFromLogs, newLogs };
+    this.dataFromLogs = { ...this.dataFromLogs, newLogs };
     if (newLogs) {
       this.updateView(newLogs);
     }
@@ -22,12 +21,9 @@ class LogView {
 
   updateView(newLogs) {
     const logs = newLogs;
-    debugger
     this.element.innerText = logs.join('\n');
   }
 }
 
-export {
-  LogView
-}
+export default LogView;
 

@@ -8,21 +8,25 @@ const events = {
     formButtonElement.addEventListener('click', () => {
       handler(formInputElement.value);
     });
-  }
-}
+  },
+};
 
 class FormView {
-  constructor(data) {
+  constructor() {
+    this.elements = {
+      formElement,
+      formButtonElement,
+      formInputElement,
+      formAnswerElement,
+    };
     this.events = events;
   }
 
   updateView(data) {
-    formAnswerElement.innerText = data;
+    this.elements.formAnswerElement.innerText = data;
   }
 }
 
 
-export {
-  FormView
-}
+export default FormView;
 

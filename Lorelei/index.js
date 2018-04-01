@@ -1,5 +1,7 @@
-import { Presenter } from './Presenter';
+import Presenter from './Presenter';
+import Model from './Model';
 
-export {
+export { 
   Presenter,
+  Model,
 };

@@ -1,23 +1,29 @@
-import { Presenter } from "../../../Lorelei";
+import { Presenter } from '../../../Lorelei';
 
 const eventsConnector = {
   viewToModel: [
     {
       in: 'handleSendToServer',
-      out: 'sendDataToServer'
+      out: 'sendDataToServer',
+    },
+  ],
+  modelToModel: [
+    {
+      in: 'handleDataSentToServer',
+      out: 'getModelData',
+    },
+    {
+      in: 'handleReceivedDataByServer',
+      out: 'getModelData',
     },
   ],
   modelToView: [
     {
-      in: 'handleDataIsSent',
-      out: 'updateView'
+      in: 'handleGetModelData',
+      out: 'updateView',
     },
-    {
-      in: 'handleDataReceived',
-      out: 'updateView'
-    }
-  ]
-}
+  ],
+};
 
 class FormPresenter extends Presenter {
   constructor(view, model, options) {
@@ -25,6 +31,4 @@ class FormPresenter extends Presenter {
   }
 }
 
-export {
-  FormPresenter
-}
+export default FormPresenter;

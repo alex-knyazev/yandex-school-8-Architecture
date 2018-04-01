@@ -8,16 +8,17 @@ class Logger {
   }
 
   getLogger() {
-    return this;
+    return this.addSubscriber;
   }
 
   /**
    * Обработка и сохранение лога
-   * @param {string} className 
-   * @param {string} methodName 
+   * @param {string} className
+   * @param {string} methodName
    */
   saveLog(connectorType, connector) {
-    this.logs.push(`${connectorType}. ${connector.in} - ${connector.out}`);
+    const logNumber = this.logs.length;
+    this.logs.push(`${logNumber} ${connectorType}. ${connector.in} - ${connector.out}`);
     for (let i = 0; i < this.subscribers.length; i++) {
       const subscriber = this.subscribers[i];
       subscriber(this.logs);
@@ -34,6 +35,4 @@ class Logger {
   }
 }
 
-export { 
-  Logger
-}
+export default Logger;
