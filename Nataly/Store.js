@@ -1,10 +1,11 @@
 class Store {
   /**
    * Создаем новый Store
-   * @param {object} data 
-   * @param {function} updateStoreByActions 
+   * @param {object} data
+   * @param {function} updateStoreByActions
    */
   constructor(data, updateStoreByActions) {
+    this.className = 'Store';
     this.data = data;
     this.updateStoreByActions = updateStoreByActions;
     this.subscribers = [];
@@ -14,7 +15,7 @@ class Store {
 
   /**
    * Обновление данных в Store
-   * @param {object} action 
+   * @param {object} action
    */
   update(action) {
     const { subscribers } = this;
@@ -26,10 +27,10 @@ class Store {
       }
     }
   }
-  
+
   /**
    * Добавление подписчика на изменения в Store
-   * @param {function} subscriber 
+   * @param {function} subscriber
    */
   addSubscriber(subscriber) {
     if (typeof subscriber !== 'function') {
@@ -41,4 +42,3 @@ class Store {
 }
 
 export default Store;
-

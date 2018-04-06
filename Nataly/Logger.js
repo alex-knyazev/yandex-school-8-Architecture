@@ -18,7 +18,7 @@ class Logger {
       if (typeof value === 'function') {
         // eslint-disable-next-line
         object[keys[i]] = function wrapper(...args) {
-          saveLog(object.constructor.name, value.name);
+          saveLog(object.className, value.name);
           return value(...args);
         };
       }
@@ -27,8 +27,8 @@ class Logger {
 
   /**
    * Обработка и сохранение лога
-   * @param {string} className 
-   * @param {string} methodName 
+   * @param {string} className
+   * @param {string} methodName
    */
   saveLog(className, methodName) {
     let normalizeMethodName = methodName.split(' ');
@@ -43,7 +43,7 @@ class Logger {
 
   /**
    * Добавление подписчика на изменения в Store
-   * @param {function} subscriber 
+   * @param {function} subscriber
    */
   addSubscriber(subscriber) {
     this.subscribers.push(subscriber);

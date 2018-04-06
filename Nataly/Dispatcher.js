@@ -1,5 +1,6 @@
 class Dispatcher {
   constructor() {
+    this.className = 'Dispatcher';
     this.stores = [];
     this.registerStore = this.registerStore.bind(this);
     this.dispatch = this.dispatch.bind(this);
@@ -7,7 +8,7 @@ class Dispatcher {
 
   /**
    * Регистрация хранилища
-   * @param {Store} store 
+   * @param {Store} store
    */
   registerStore(store) {
     if (!store) {
@@ -18,7 +19,7 @@ class Dispatcher {
 
   /**
    * Оповещение зарегестрированных хранилищ об Action
-   * @param {object} action 
+   * @param {object} action
    */
   dispatch(action) {
     for (let i = 0; i < this.stores.length; i++) {

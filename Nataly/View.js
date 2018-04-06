@@ -1,11 +1,12 @@
 class View {
   constructor(DOMElement) {
+    this.className = 'View';
     this.element = DOMElement;
   }
 
   /**
    * Запускаем функции-слушатели событий
-   * @param {array} listeners 
+   * @param {array} listeners
    */
   static runListeners(listeners) {
     for (let i = 0; i < listeners.length; i++) {
